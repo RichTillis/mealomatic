@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Welcome to Meal-o-matic
+    </ion-title>
+    <!-- <ion-buttons slot="end" *ngIf="auth.loggedIn"> -->
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button (click)="auth.login()" *ngIf="!auth.loggedIn">Login
+  </ion-button>
+</ion-content>
