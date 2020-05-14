@@ -1,6 +1,8 @@
+import { Observable } from 'rxjs';
+
 export interface Meal {
   id?: string;
   title: string;
-  image?: string;
+  image?: Observable<string>;
   description?: string;
 }

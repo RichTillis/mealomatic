@@ -11,9 +11,9 @@ import { Platform } from '@ionic/angular';
 })
 export class AppComponent {
   public menuItems = [
-    { title: "Home", route: "/home", icon: "home"},
-    { title: "Menus", route: "/menus", icon: "list-circle"},
-    { title: "Meals", route: "/meals", icon: "pizza"},
+    { title: "Home", url: "/home", icon: "home"},
+    { title: "Menus", url: "/menus", icon: "list-circle"},
+    { title: "Meals", url: "/meals", icon: "pizza"},
   ];
 
   constructor(

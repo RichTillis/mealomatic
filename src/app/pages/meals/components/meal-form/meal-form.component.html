@@ -1,0 +1,17 @@
+<form [formGroup]="mealForm" novalidate>
+  <ion-item>
+    <ion-input formControlName="title" placeholder="Title" type="text"></ion-input>
+  </ion-item>
+  <div>
+    <ng-container *ngFor="let validation of validation_messages.title">
+      <div class="error-message"
+        *ngIf="loginForm.get('title').hasError(validation.type) && (mealForm.get('title').dirty || mealForm.get('title').touched)">
+        {{ validation.message }}
+      </div>
+    </ng-container>
+  </div>
+  <ion-item>
+    <ion-input formControlName="description" placeholder="Email" type="text"></ion-input>
+  </ion-item>
+</form>
+<ion-button expand="block" (click)="createMeal()" [disabled]="mealForm.invalid">Create Meal</ion-button>

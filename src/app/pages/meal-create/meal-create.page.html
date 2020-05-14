@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create a New Meal</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="mealForm" (ngSubmit)="createMeal()" novalidate>
+
+    <ion-item>
+      <ion-input formControlName="title" placeholder="Title" type="text"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.title">
+        <div class="error-message"
+          *ngIf="mealForm.get('title').hasError(validation.type) && (mealForm.get('title').dirty || mealForm.get('title').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+    <ion-item *ngIf="imgURL">
+      <ion-img [src]="imgURL" ></ion-img>
+    </ion-item>
+
+    <input type="file" accept=".jpeg,.jpg,.png,.svg" (change)="processNewImage($event)" />
+    
+    <ion-item>
+      <ion-input formControlName="description" placeholder="Description" type="text"></ion-input>
+    </ion-item>
+    <ion-button expand="block" type="submit" [disabled]="mealForm.invalid">Create Meal</ion-button>
+  </form>
+
+</ion-content>

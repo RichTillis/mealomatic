@@ -27,6 +27,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'meal-create',
+    loadChildren: () => import('./pages/meal-create/meal-create.module').then( m => m.MealCreatePageModule)
+  },
 ];
 
 @NgModule({
