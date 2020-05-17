@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>meal-create-test</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header >
+      <input id="upload-image" class="inputfile" type="file" name="upload-image" (change)="fileChangeEvent($event)" *ngIf="!imageChangedEvent"/>
+      <label for="upload-image" *ngIf="!imageChangedEvent">
+        <ion-icon name="cloud-upload-sharp"></ion-icon> Select an image...
+      </label>
+      <ion-toolbar color="primary" *ngIf="imageChangedEvent">
+        <ion-buttons slot="start">
+          <ion-button (click)="rotateRight()">
+            <ion-icon slot="icon-only" name="chevron-forward-circle-sharp"></ion-icon>
+          </ion-button>
+          <ion-button (click)="resetImage()">
+            <ion-icon slot="icon-only" name="refresh-circle-sharp"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-button (click)="clearImage()">
+            <ion-icon slot="icon-only" name="close-circle-sharp"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+
+    </ion-card-header>
+    <ion-card-content *ngIf="imageChangedEvent">
+      <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+        [containWithinAspectRatio]="containWithinAspectRatio" [aspectRatio]="4 / 4" [resizeToWidth]="600"
+        [cropperMinWidth]="128" [onlyScaleDown]="true" [roundCropper]="false" [canvasRotation]="canvasRotation"
+        [transform]="transform" [alignImage]="'left'" [style.display]="showCropper ? null : 'none'" format="png"
+        (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady($event)"
+        (loadImageFailed)="loadImageFailed()">
+      </image-cropper>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

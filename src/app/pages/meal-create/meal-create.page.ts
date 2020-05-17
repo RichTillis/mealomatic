@@ -5,6 +5,9 @@ import { MealService } from '../../services/meal/meal.service';
 import { Meal } from 'src/app/interfaces/meal';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { CompressorService } from '../../services/compressor/compressor.service';
+import { Observable } from 'rxjs';
+import { ImageCroppedEvent, Dimensions, ImageTransform, base64ToFile } from 'ngx-image-cropper';
+
 
 // references
 // https://www.talkingdotnet.com/show-image-preview-before-uploading-using-angular-7/
@@ -12,6 +15,10 @@ import { CompressorService } from '../../services/compressor/compressor.service'
 // https://medium.com/javascript-in-plain-english/upload-files-and-images-to-firebase-and-retrieve-a-downloadable-url-a5b3467bb89c
 // https://www.npmjs.com/package/ngx-image-compress
 // https://zocada.com/compress-resize-images-javascript-browser/
+// https://www.thepolyglotdeveloper.com/2019/06/image-cropping-zooming-scaling-angular-javascript/
+// https://www.youtube.com/watch?v=UnqVkzWg2W0
+// https://github.com/Mawi137/ngx-image-cropper
+// https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/
 
 @Component({
   selector: 'app-meal-create',
@@ -25,6 +32,117 @@ export class MealCreatePage implements OnInit {
   private basePath = '/images';
   private data: File;
   imgURL: any;
+
+  //************************ image cropping functions
+  // TODO - this s/b a seperate component
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+  canvasRotation = 0;
+  rotation = 0;
+  scale = 1;
+  showCropper = false;
+  containWithinAspectRatio = false;
+  transform: ImageTransform = {};
+
+  fileChangeEvent(event: any): void {
+    this.imageChangedEvent = event;
+  }
+
+  imageCropped(event: ImageCroppedEvent) {
+   
+    this.croppedImage = event.base64;
+    // console.log(event);
+    console.log(event, base64ToFile(event.base64));
+  }
+
+  imageLoaded() {
+    this.showCropper = true;
+    console.log('Image loaded');
+  }
+
+  cropperReady(sourceImageDimensions: Dimensions) {
+    console.log('Cropper ready', sourceImageDimensions);
+  }
+
+  rotateLeft() {
+    this.canvasRotation--;
+    this.flipAfterRotate();
+  }
+
+  rotateRight() {
+    this.canvasRotation++;
+    this.flipAfterRotate();
+  }
+
+  private flipAfterRotate() {
+    const flippedH = this.transform.flipH;
+    const flippedV = this.transform.flipV;
+    this.transform = {
+      ...this.transform,
+      flipH: flippedV,
+      flipV: flippedH
+    };
+  }
+
+  flipHorizontal() {
+    this.transform = {
+      ...this.transform,
+      flipH: !this.transform.flipH
+    };
+  }
+
+  flipVertical() {
+    this.transform = {
+      ...this.transform,
+      flipV: !this.transform.flipV
+    };
+  }
+
+  resetImage() {
+    this.scale = 1;
+    this.rotation = 0;
+    this.canvasRotation = 0;
+    this.transform = {};
+  }
+
+  zoomOut() {
+    this.scale -= .1;
+    this.transform = {
+      ...this.transform,
+      scale: this.scale
+    };
+  }
+
+  zoomIn() {
+    this.scale += .1;
+    this.transform = {
+      ...this.transform,
+      scale: this.scale
+    };
+  }
+
+  toggleContainWithinAspectRatio() {
+    this.containWithinAspectRatio = !this.containWithinAspectRatio;
+  }
+
+  updateRotation() {
+    this.transform = {
+      ...this.transform,
+      rotate: this.rotation
+    };
+  }
+
+  clearImage() {
+    this.scale = 1;
+    this.rotation = 0;
+    this.canvasRotation = 0;
+    this.imageChangedEvent = null;
+  }
+
+  loadImageFailed() {
+    console.log('Load failed');
+  }
+  //************************ image cropping functions - done
 
   validation_messages = {
     title: [
@@ -44,7 +162,6 @@ export class MealCreatePage implements OnInit {
   ngOnInit() {
     this.mealForm = this.formBuilder.group({
       title: ["", Validators.required],
-      description: [""],
       mealImage: [null]
     });
   }
@@ -72,7 +189,6 @@ export class MealCreatePage implements OnInit {
       reader.readAsDataURL(res);
       reader.onload = () => {
 
-
         this.zone.run(() => {
           this.mealImage = res;
           this.imgURL = reader.result;
@@ -83,7 +199,6 @@ export class MealCreatePage implements OnInit {
 
   createMeal() {
     let title: string = this.mealForm.get("title").value;
-    let description: string = this.mealForm.get("description").value;
     let imageObject = this.mealImage;
     let id = this.mealService.createId();
 
@@ -91,10 +206,6 @@ export class MealCreatePage implements OnInit {
       id: id,
       title: title
     };
-
-    if (description) {
-      newMeal.description = description;
-    }
 
     if (imageObject) {
       //need to grab the image file extension and append it to the id and use it as the filename
@@ -115,4 +226,6 @@ export class MealCreatePage implements OnInit {
       })
     }
   }
+
+
 }

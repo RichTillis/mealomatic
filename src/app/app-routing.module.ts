@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'meal-create',
     loadChildren: () => import('./pages/meal-create/meal-create.module').then( m => m.MealCreatePageModule)
   },
+  {
+    path: 'meal-create-test',
+    loadChildren: () => import('./pages/meal-create-test/meal-create-test.module').then( m => m.MealCreateTestPageModule)
+  },
 ];
 
 @NgModule({

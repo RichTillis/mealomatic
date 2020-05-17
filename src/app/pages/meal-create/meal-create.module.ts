@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { MealCreatePageRoutingModule } from './meal-create-routing.module';
 
 import { MealCreatePage } from './meal-create.page';
+import { ImageCropperModule } from 'ngx-image-cropper';
+
 
 @NgModule({
   imports: [
@@ -14,7 +16,8 @@ import { MealCreatePage } from './meal-create.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    MealCreatePageRoutingModule
+    MealCreatePageRoutingModule,
+    ImageCropperModule
   ],
   declarations: [MealCreatePage]
 })

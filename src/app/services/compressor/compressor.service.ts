@@ -10,7 +10,7 @@ export class CompressorService {
 
   constructor() { }
   compress(file: File): Observable<any> {
-    const width = 600; // For scaling relative to width
+    const width = 300; // For scaling relative to width
     const reader = new FileReader();
     reader.readAsDataURL(file);
     return Observable.create(observer => {
