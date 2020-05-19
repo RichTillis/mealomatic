@@ -5,9 +5,7 @@ import { MealService } from '../../services/meal/meal.service';
 import { Meal } from 'src/app/interfaces/meal';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { CompressorService } from '../../services/compressor/compressor.service';
-import { Observable } from 'rxjs';
 import { ImageCroppedEvent, Dimensions, ImageTransform, base64ToFile } from 'ngx-image-cropper';
-
 
 // references
 // https://www.talkingdotnet.com/show-image-preview-before-uploading-using-angular-7/
@@ -27,11 +25,79 @@ import { ImageCroppedEvent, Dimensions, ImageTransform, base64ToFile } from 'ngx
 })
 export class MealCreatePage implements OnInit {
   mealForm: FormGroup;
+  mealImage: any;
 
-  // move these
-  private basePath = '/images';
-  private data: File;
-  imgURL: any;
+  validation_messages = {
+    title: [
+      { type: "required", message: "A title is required." },
+    ],
+  };
+
+  constructor(private zone: NgZone,
+    public formBuilder: FormBuilder,
+    private cd: ChangeDetectorRef,
+    public modalController: ModalController,
+    private mealService: MealService,
+    private fireStorage: AngularFireStorage,
+    private compressor: CompressorService) {
+  }
+
+  ngOnInit() {
+    this.mealForm = this.formBuilder.group({
+      title: ["", Validators.required],
+      mealImage: [null]
+    });
+  }
+
+  closeModal() {
+    this.modalController.dismiss({
+      'dismissed': true
+    });
+  }
+
+  compress(image: File) {
+    return this.compressor.compress(image)
+  }
+
+  private processNewImage(imageFile) {
+    this.compress(imageFile).subscribe(res => {
+      let reader = new FileReader();
+      reader.readAsDataURL(res);
+      reader.onload = () => {
+        this.zone.run(() => {
+          this.mealImage = res;
+        })
+      };
+    });
+  }
+
+  createMeal() {
+    let title: string = this.mealForm.get("title").value;
+    let id = this.mealService.createId();
+
+    let newMeal: Meal = {
+      id: id,
+      title: title
+    };
+
+    if (this.mealImage) {
+      const filePath = `/images/${id}`;
+      this.fireStorage.upload(filePath, this.mealImage).then(() => {
+        const imageRef = this.fireStorage.ref(filePath);
+        imageRef.getDownloadURL().subscribe(url => {
+          newMeal.image = url;
+          this.mealService.addMeal(newMeal).then(() => {
+            this.closeModal();
+          })
+        })
+      }).catch(err => alert(err));
+    }
+    else {
+      this.mealService.addMeal(newMeal).then(() => {
+        this.closeModal();
+      })
+    }
+  }
 
   //************************ image cropping functions
   // TODO - this s/b a seperate component
@@ -50,18 +116,20 @@ export class MealCreatePage implements OnInit {
 
   imageCropped(event: ImageCroppedEvent) {
    
-    this.croppedImage = event.base64;
+    // this.croppedImage = event.base64;
     // console.log(event);
-    console.log(event, base64ToFile(event.base64));
+    this.croppedImage = base64ToFile(event.base64);
+    // console.log(event, base64ToFile(event.base64));
+    this.processNewImage(this.croppedImage);
   }
 
   imageLoaded() {
     this.showCropper = true;
-    console.log('Image loaded');
+    // console.log('Image loaded');
   }
 
   cropperReady(sourceImageDimensions: Dimensions) {
-    console.log('Cropper ready', sourceImageDimensions);
+    // console.log('Cropper ready', sourceImageDimensions);
   }
 
   rotateLeft() {
@@ -143,89 +211,5 @@ export class MealCreatePage implements OnInit {
     console.log('Load failed');
   }
   //************************ image cropping functions - done
-
-  validation_messages = {
-    title: [
-      { type: "required", message: "A title is required." },
-    ],
-  };
-
-  constructor(private zone: NgZone,
-    public formBuilder: FormBuilder,
-    private cd: ChangeDetectorRef,
-    public modalController: ModalController,
-    private mealService: MealService,
-    private fireStorage: AngularFireStorage,
-    private compressor: CompressorService) {
-  }
-
-  ngOnInit() {
-    this.mealForm = this.formBuilder.group({
-      title: ["", Validators.required],
-      mealImage: [null]
-    });
-  }
-
-  closeModal() {
-    this.modalController.dismiss({
-      'dismissed': true
-    });
-  }
-
-  compress(image: File) {
-    return this.compressor.compress(image)
-  }
-  mealImage: any;
-
-  public processNewImage(event) {
-    this.data = event.target.files;
-
-    console.log(this.data[0]);
-    this.compress(this.data[0]).subscribe(res => {
-      console.log(res)
-
-
-      let reader = new FileReader();
-      reader.readAsDataURL(res);
-      reader.onload = () => {
-
-        this.zone.run(() => {
-          this.mealImage = res;
-          this.imgURL = reader.result;
-        })
-      };
-    });
-  }
-
-  createMeal() {
-    let title: string = this.mealForm.get("title").value;
-    let imageObject = this.mealImage;
-    let id = this.mealService.createId();
-
-    let newMeal: Meal = {
-      id: id,
-      title: title
-    };
-
-    if (imageObject) {
-      //need to grab the image file extension and append it to the id and use it as the filename
-      const filePath = `${this.basePath}/${imageObject.name}`;
-      this.fireStorage.upload(filePath, imageObject).then(() => {
-        const imageRef = this.fireStorage.ref(filePath);
-        imageRef.getDownloadURL().subscribe(url => {
-          newMeal.image = url;
-          this.mealService.addMeal(newMeal).then(() => {
-            this.closeModal();
-          })
-        })
-      }).catch(err => alert(err));
-    }
-    else {
-      this.mealService.addMeal(newMeal).then(() => {
-        this.closeModal();
-      })
-    }
-  }
-
 
 }

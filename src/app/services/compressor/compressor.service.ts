@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class CompressorService {
 
   constructor() { }
+
   compress(file: File): Observable<any> {
     const width = 300; // For scaling relative to width
     const reader = new FileReader();

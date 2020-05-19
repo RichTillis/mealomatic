@@ -9,7 +9,7 @@
     <ion-title>Create a New Meal</ion-title>
     <ion-buttons slot="end">
 
-      <ion-button type="submit" [disabled]="mealForm.invalid" color="success" >
+      <ion-button type="submit" [disabled]="mealForm.invalid" color="success" (click)="createMeal()">
         <ion-icon  slot="icon-only" name="checkmark-circle-sharp"></ion-icon>      </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -67,7 +67,7 @@
 
       </ion-card-content>
     </ion-card>
-    <img [src]="croppedImage" [style.border]="croppedImage ? '1px solid black' : 'none'" />
+    <!-- <img [src]="croppedImage" [style.border]="croppedImage ? '1px solid black' : 'none'" /> -->
 
     <!-- <ion-button expand="block" type="submit" [disabled]="mealForm.invalid">Create Meal</ion-button> -->
   </form>
