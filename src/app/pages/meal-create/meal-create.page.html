@@ -4,13 +4,12 @@
       <ion-button (click)="closeModal()">
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
-      
     </ion-buttons>
     <ion-title>Create a New Meal</ion-title>
     <ion-buttons slot="end">
-
       <ion-button type="submit" [disabled]="mealForm.invalid" color="success" (click)="createMeal()">
-        <ion-icon  slot="icon-only" name="checkmark-circle-sharp"></ion-icon>      </ion-button>
+        <ion-icon slot="icon-only" name="checkmark-circle-sharp"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -30,45 +29,6 @@
       </ng-container>
     </div>
 
-    <!-- <ion-item *ngIf="imgURL">
-      <ion-img [src]="imgURL"></ion-img>
-    </ion-item>
-    <input type="file" accept=".jpeg,.jpg,.png,.svg" (change)="processNewImage($event)" /> -->
-    <div *ngIf="!imageChangedEvent" class="input-file-container">
-      <input id="upload-image" class="inputfile" type="file" name="upload-image" (change)="fileChangeEvent($event)" />
-      <label for="upload-image">
-        <ion-icon name="cloud-upload-sharp"></ion-icon> Select an image...
-      </label>
-    </div>
-    <ion-card>
-      <ion-toolbar color="primary" *ngIf="imageChangedEvent">
-        <ion-buttons slot="start">
-          <ion-button (click)="rotateRight()">
-            <ion-icon slot="icon-only" name="chevron-forward-circle-sharp"></ion-icon>
-          </ion-button>
-          <ion-button (click)="resetImage()">
-            <ion-icon slot="icon-only" name="refresh-circle-sharp"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-        <ion-buttons slot="end">
-          <ion-button (click)="clearImage()">
-            <ion-icon slot="icon-only" name="close-circle-sharp"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-      <ion-card-content *ngIf="imageChangedEvent">
-        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
-          [containWithinAspectRatio]="containWithinAspectRatio" [aspectRatio]="4 / 4" [resizeToWidth]="600"
-          [cropperMinWidth]="128" [onlyScaleDown]="true" [roundCropper]="false" [canvasRotation]="canvasRotation"
-          [transform]="transform" [alignImage]="'left'" [style.display]="showCropper ? null : 'none'" format="png"
-          (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady($event)"
-          (loadImageFailed)="loadImageFailed()">
-        </image-cropper>
-
-      </ion-card-content>
-    </ion-card>
-    <!-- <img [src]="croppedImage" [style.border]="croppedImage ? '1px solid black' : 'none'" /> -->
-
-    <!-- <ion-button expand="block" type="submit" [disabled]="mealForm.invalid">Create Meal</ion-button> -->
+    <app-image-cropper (imageChanged)="processNewImage($event)"></app-image-cropper>
   </form>
 </ion-content>
