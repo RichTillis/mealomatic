@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { MealCreateTestPage } from './meal-create-test.page';
+import { ImageCropComponent } from './image-crop.component';
 
-describe('MealCreateTestPage', () => {
-  let component: MealCreateTestPage;
-  let fixture: ComponentFixture<MealCreateTestPage>;
+describe('ImageCropperComponent', () => {
+  let component: ImageCropComponent;
+  let fixture: ComponentFixture<ImageCropComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MealCreateTestPage ],
+      declarations: [ ImageCropComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MealCreateTestPage);
+    fixture = TestBed.createComponent(ImageCropComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

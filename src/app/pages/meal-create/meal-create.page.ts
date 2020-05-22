@@ -38,7 +38,7 @@ export class MealCreatePage implements OnInit {
     public modalController: ModalController,
     private mealService: MealService,
     private fireStorage: AngularFireStorage,
-    private compressor: CompressorService) {
+    private compressorService: CompressorService) {
   }
 
   ngOnInit() {
@@ -55,11 +55,13 @@ export class MealCreatePage implements OnInit {
   }
 
   compress(image: File) {
-    return this.compressor.compress(image)
+    let width = 600;
+    let type = 'jpeg';
+    return this.compressorService.compress(image, width, type)
   }
 
   processNewImage(event) {
-    console.log(event);
+    // console.log(event);
     let newImage = event;
     this.compress(newImage).subscribe(res => {
       let reader = new FileReader();

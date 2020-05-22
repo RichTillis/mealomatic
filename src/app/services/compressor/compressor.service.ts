@@ -10,8 +10,8 @@ export class CompressorService {
 
   constructor() { }
 
-  compress(file: File): Observable<any> {
-    const width = 300; // For scaling relative to width
+  compress(file: File, width: number, imageType: string): Observable<any> {
+    // const width = 300; // For scaling relative to width
     const reader = new FileReader();
     reader.readAsDataURL(file);
     return Observable.create(observer => {
@@ -29,12 +29,14 @@ export class CompressorService {
             blob => {
               observer.next(
                 new File([blob], file.name, {
-                  type: 'image/jpeg',
+                  // type: 'image/jpeg',
+                  type: 'image/' + imageType,
                   lastModified: Date.now(),
                 }),
               );
             },
-            'image/jpeg',
+            'image/' + imageType,
+            // 'image/jpeg',
             1,
           );
         }),

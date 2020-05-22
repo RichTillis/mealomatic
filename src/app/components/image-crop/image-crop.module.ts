@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
-import { ImageCropperComponent } from './image-cropper.component'
+import { ImageCropComponent } from './image-crop.component'
 import { ImageCropperModule } from 'ngx-image-cropper';
 
 
@@ -14,9 +14,9 @@ import { ImageCropperModule } from 'ngx-image-cropper';
         IonicModule,
         ImageCropperModule
     ],
-    declarations: [ImageCropperComponent],
+    declarations: [ImageCropComponent],
     exports: [
-        ImageCropperComponent
+        ImageCropComponent
     ]
 })
 export class ImageCropModule { }

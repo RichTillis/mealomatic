@@ -1,15 +1,14 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { ImageCroppedEvent, Dimensions, ImageTransform, base64ToFile } from 'ngx-image-cropper';
 
-
 @Component({
-  selector: 'app-image-cropper',
-  templateUrl: './image-cropper.component.html',
-  styleUrls: ['./image-cropper.component.scss'],
+  selector: 'app-image-crop',
+  templateUrl: './image-crop.component.html',
+  styleUrls: ['./image-crop.component.scss'],
 })
-export class ImageCropperComponent {
+export class ImageCropComponent {
   @Output()
-  imageChanged  = new EventEmitter();;
+  imageChanged  = new EventEmitter();
 
   constructor() { }
 
@@ -30,7 +29,6 @@ export class ImageCropperComponent {
    
     this.croppedImage = base64ToFile(event.base64);
     this.imageChanged.emit(this.croppedImage);
-    // this.processNewImage(this.croppedImage);
   }
 
   imageLoaded() {
