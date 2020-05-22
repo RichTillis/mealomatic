@@ -67,9 +67,10 @@ export class MealCreatePage implements OnInit {
       let reader = new FileReader();
       reader.readAsDataURL(res);
       reader.onload = () => {
-        this.zone.run(() => {
-          this.mealImage = res;
-        })
+        this.mealImage = res;
+        // this.zone.run(() => {
+        //   this.mealImage = res;
+        // })
       };
     });
   }

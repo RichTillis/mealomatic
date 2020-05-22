@@ -20,8 +20,9 @@
     </ion-fab-button>
   </ion-fab>
 
+  <!-- MOBILE -->
   <ion-list class="mobile-layout">
-    <ion-item *ngFor="let meal of meals" >
+    <ion-item *ngFor="let meal of meals">
       <ion-thumbnail slot="start">
         <ion-img [src]="meal.image"></ion-img>
       </ion-thumbnail>
@@ -31,15 +32,30 @@
       </ion-label>
     </ion-item>
   </ion-list>
-  <ion-list class="web-layout">
+
+  <!-- WEB -->
+  <ion-grid class="web-layout">
+    <ion-row>
+      <ion-col size="3" *ngFor="let meal of meals">
+        <ion-card >
+          <ion-img [src]="meal.image"></ion-img>
+          <ion-card-header>
+            <ion-card-subtitle>TBD</ion-card-subtitle>
+            <ion-card-title>{{meal.title}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- <ion-list class="web-layout">
     <ion-item *ngFor="let meal of meals">
       <ion-card>
         <ion-img [src]="meal.image"></ion-img>
         <ion-card-header>
           <ion-card-subtitle>Destination</ion-card-subtitle>
           <ion-card-title>{{meal.title}}</ion-card-title>
-        </ion-card-header>      
+        </ion-card-header>
       </ion-card>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
 </ion-content>
