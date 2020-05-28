@@ -3,12 +3,16 @@
     <ion-title>
       Meals
     </ion-title>
-    <!-- <ion-buttons slot="end" *ngIf="auth.loggedIn"> -->
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-icon name="person-circle-outline"></ion-icon>
+      <ion-button (click)="auth.login()" *ngIf="!auth.loggedIn" color="primary" fill="outline">Login
+        <ion-icon slot="end" name="log-in"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="auth.loggedIn">
+        <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -37,12 +41,21 @@
   <ion-grid class="web-layout">
     <ion-row>
       <ion-col size="3" *ngFor="let meal of meals">
-        <ion-card >
+        <ion-card>
           <ion-img [src]="meal.image"></ion-img>
           <ion-card-header>
-            <ion-card-subtitle>TBD</ion-card-subtitle>
             <ion-card-title>{{meal.title}}</ion-card-title>
+            <div>
+              subtitle
+              <ion-icon class="edit-icon" slot="icon-only" name="create" (click)="editMeal(meal.id)"></ion-icon>              
+            </div>
           </ion-card-header>
+          
+          <!-- <ion-row class="cardfooter">
+            <ion-col>
+              <p>Footer goes here </p>
+            </ion-col>
+          </ion-row> -->
         </ion-card>
       </ion-col>
     </ion-row>

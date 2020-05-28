@@ -3,6 +3,7 @@ import { MealService } from '../../services/meal/meal.service';
 import { ModalController } from '@ionic/angular';
 import { Meal } from 'src/app/interfaces/meal';
 import { MealCreatePage } from '../meal-create/meal-create.page';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-meals',
@@ -12,7 +13,7 @@ import { MealCreatePage } from '../meal-create/meal-create.page';
 export class MealsPage implements OnInit, OnDestroy {
 
   meals: Meal[];
-  constructor(private mealService: MealService, public modalController: ModalController) { }
+  constructor(public auth: AuthService, private mealService: MealService, public modalController: ModalController) { }
 
   ngOnInit() {
     this.mealService.meals.subscribe((data: any) => {
@@ -25,6 +26,10 @@ export class MealsPage implements OnInit, OnDestroy {
 
   createNewMeal() {
     this.presentNewMealModal();
+  }
+
+  editMeal(mealId:string){
+    console.log('meal id: ', mealId);
   }
 
   async presentNewMealModal() {
