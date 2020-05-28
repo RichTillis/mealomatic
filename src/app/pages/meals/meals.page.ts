@@ -28,7 +28,7 @@ export class MealsPage implements OnInit, OnDestroy {
     this.presentNewMealModal();
   }
 
-  editMeal(mealId:string){
+  editMeal(mealId: string) {
     console.log('meal id: ', mealId);
   }
 

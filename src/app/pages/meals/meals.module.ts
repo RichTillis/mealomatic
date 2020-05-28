@@ -8,13 +8,15 @@ import { MealsPageRoutingModule } from './meals-routing.module';
 
 import { MealsPage } from './meals.page';
 import { MealFormComponent } from './components/meal-form/meal-form.component';
+import { AnimatedLikeModule } from '../../components/animated-like/animated-like.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MealsPageRoutingModule
+    MealsPageRoutingModule,
+    AnimatedLikeModule
   ],
   declarations: [MealsPage, MealFormComponent]
 })

@@ -42,6 +42,7 @@
     <ion-row>
       <ion-col size="3" *ngFor="let meal of meals">
         <ion-card>
+          <app-animated-like></app-animated-like>
           <ion-img [src]="meal.image"></ion-img>
           <ion-card-header>
             <ion-card-title>{{meal.title}}</ion-card-title>
