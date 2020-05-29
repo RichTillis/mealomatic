@@ -8,7 +8,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   animations: [
     trigger('heart', [
       state('unliked', style({
-        color: '#fff',
+        color: '#000',
         opacity: '0.5',
         transform: 'scale(1)'
       })),
@@ -24,7 +24,8 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 export class AnimatedLikeComponent implements OnInit {
 
   public likeState: string = 'unliked';
-  public iconName: string = 'heart-outline';
+  // public iconName: string = 'heart-outline';
+  public iconName: string = 'heart-circle';
 
   constructor() { }
 
@@ -34,10 +35,12 @@ export class AnimatedLikeComponent implements OnInit {
 
     if (this.likeState == 'unliked') {
       this.likeState = 'liked';
-      this.iconName = 'heart';
+      this.iconName = 'heart-circle-outline';
+      // this.iconName = 'heart';
     } else {
       this.likeState = 'unliked';
-      this.iconName = 'heart-outline';
+      // this.iconName = 'heart-outline';
+      this.iconName = 'heart-circle';
     }
 
   }

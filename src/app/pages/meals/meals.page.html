@@ -7,6 +7,9 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
+      </ion-button>
       <ion-button (click)="auth.login()" *ngIf="!auth.loggedIn" color="primary" fill="outline">Login
         <ion-icon slot="end" name="log-in"></ion-icon>
       </ion-button>
@@ -25,17 +28,27 @@
   </ion-fab>
 
   <!-- MOBILE -->
-  <ion-list class="mobile-layout">
-    <ion-item *ngFor="let meal of meals">
-      <ion-thumbnail slot="start">
+  <ion-grid class="mobile-layout">
+
+    <ion-row *ngFor="let meal of meals">
+      <ion-col size="3">
+        <app-animated-like></app-animated-like>
         <ion-img [src]="meal.image"></ion-img>
-      </ion-thumbnail>
-      <ion-label>
-        <h2>{{meal.title}}</h2>
-        <p>TBD</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+      </ion-col>
+      <ion-col size="6">
+        <ion-label>
+          <h2>{{meal.title}}</h2>
+          <p>TBD</p>
+        </ion-label>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button fill="outline" class="add-to-cart-button">
+          <ion-icon name="cart-outline" slot="icon-only" size="large"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 
   <!-- WEB -->
   <ion-grid class="web-layout">
@@ -43,15 +56,19 @@
       <ion-col size="3" *ngFor="let meal of meals">
         <ion-card>
           <app-animated-like></app-animated-like>
+          
           <ion-img [src]="meal.image"></ion-img>
           <ion-card-header>
             <ion-card-title>{{meal.title}}</ion-card-title>
             <div>
-              subtitle
-              <ion-icon class="edit-icon" slot="icon-only" name="create" (click)="editMeal(meal.id)"></ion-icon>              
+              <ion-card-subtitle>subtitle</ion-card-subtitle>
+              <!-- <ion-icon class="edit-icon" slot="icon-only" name="create" (click)="editMeal(meal.id)"></ion-icon> -->
+              <ion-button class="add-to-cart-button" fill="outline">
+                <ion-icon name="cart-outline" slot="icon-only" size="large"></ion-icon>
+              </ion-button>
             </div>
           </ion-card-header>
-          
+
           <!-- <ion-row class="cardfooter">
             <ion-col>
               <p>Footer goes here </p>
