@@ -1,12 +1,15 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header>
+  <ion-toolbar color="primary">
     <ion-title>
       Meals
     </ion-title>
-    <ion-buttons slot="start">
+    <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-buttons slot="end">
+    <ion-buttons slot="start">
+      <ion-icon name="person-circle-outline" size="large"></ion-icon>
+    </ion-buttons>
+    <!-- <ion-buttons slot="end">
       <ion-button>
         <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
       </ion-button>
@@ -16,38 +19,56 @@
       <ion-button *ngIf="auth.loggedIn">
         <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
       </ion-button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="createNewMeal()">
+    <ion-fab-button (click)="createNewMeal()" color="tertiary">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
   <!-- MOBILE -->
-  <ion-grid class="mobile-layout">
+  <div class="mobile-layout">
+    <ion-segment (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="grid">
+        <ion-icon name="grid-outline"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="list">
+        <ion-icon name="list-outline"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="square">
+        <ion-icon name="square-outline"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="heart">
+        <ion-icon name="heart-outline"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+    <ion-searchbar></ion-searchbar>
 
     <ion-row *ngFor="let meal of meals">
-      <ion-col size="3">
-        <app-animated-like></app-animated-like>
-        <ion-img [src]="meal.image"></ion-img>
-      </ion-col>
-      <ion-col size="6">
-        <ion-label>
-          <h2>{{meal.title}}</h2>
-          <p>TBD</p>
-        </ion-label>
-      </ion-col>
-      <ion-col size="3">
+      <ion-grid>
+        <ion-col size="3">
+          <!-- <app-animated-like></app-animated-like> -->
+          <ion-img [src]="meal.image"></ion-img>
+        </ion-col>
+        <ion-col>
+          <ion-label>
+            <h2>{{meal.title}}</h2>
+            <p>TBD</p>
+          </ion-label>
+        </ion-col>
+      </ion-grid>
+      
+      <!-- <ion-col size="3">
         <ion-button fill="outline" class="add-to-cart-button">
           <ion-icon name="cart-outline" slot="icon-only" size="large"></ion-icon>
         </ion-button>
-      </ion-col>
+      </ion-col> -->
     </ion-row>
-  </ion-grid>
+  </div>
 
 
   <!-- WEB -->
@@ -56,7 +77,7 @@
       <ion-col size="3" *ngFor="let meal of meals">
         <ion-card>
           <app-animated-like></app-animated-like>
-          
+
           <ion-img [src]="meal.image"></ion-img>
           <ion-card-header>
             <ion-card-title>{{meal.title}}</ion-card-title>

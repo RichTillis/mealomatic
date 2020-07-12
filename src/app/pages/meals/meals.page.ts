@@ -31,6 +31,9 @@ export class MealsPage implements OnInit, OnDestroy {
   editMeal(mealId: string) {
     console.log('meal id: ', mealId);
   }
+  segmentChanged(event: any) {
+    console.log(event);
+  }
 
   async presentNewMealModal() {
     const modal = await this.modalController.create({

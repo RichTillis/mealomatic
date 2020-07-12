@@ -3,12 +3,17 @@
 }
 
 .mobile-layout {
-    padding-left: 15px;
+    // padding-left: 15px;
 
     ion-row {
         padding-top: 10px;
     }
 }
+
+ion-searchbar{
+    color: var(--ion-color-primary);
+}
+
 
 .card-footer {
     position: absolute;
