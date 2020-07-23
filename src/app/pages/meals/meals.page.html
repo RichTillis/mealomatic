@@ -21,7 +21,39 @@
       </ion-button>
     </ion-buttons> -->
   </ion-toolbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="10">
+        <ion-searchbar></ion-searchbar>
+      </ion-col>
+      <ion-col size="2" class="ion-align-self-center">
+        <ion-button fill="clear" class="sort">
+          <ion-icon name="funnel"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-header>
+<!-- <ion-split-pane>
+  <ion-menu side="end" type="push" contentId="main">
+    <ion-header>
+      <ion-toolbar color="danger">
+        <ion-title>End Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+</ion-split-pane> -->
+
 
 <ion-content class="ion-padding">
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
@@ -32,21 +64,6 @@
 
   <!-- MOBILE -->
   <div class="mobile-layout">
-    <ion-segment (ionChange)="segmentChanged($event)">
-      <ion-segment-button value="grid">
-        <ion-icon name="grid-outline"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button value="list">
-        <ion-icon name="list-outline"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button value="square">
-        <ion-icon name="square-outline"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button value="heart">
-        <ion-icon name="heart-outline"></ion-icon>
-      </ion-segment-button>
-    </ion-segment>
-    <ion-searchbar></ion-searchbar>
 
     <ion-row *ngFor="let meal of meals">
       <ion-grid>
@@ -61,7 +78,7 @@
           </ion-label>
         </ion-col>
       </ion-grid>
-      
+
       <!-- <ion-col size="3">
         <ion-button fill="outline" class="add-to-cart-button">
           <ion-icon name="cart-outline" slot="icon-only" size="large"></ion-icon>
@@ -111,3 +128,6 @@
     </ion-item>
   </ion-list> -->
 </ion-content>
+<ion-footer>
+  <ion-toolbar color="primary" class="min-height-10"></ion-toolbar>
+</ion-footer>

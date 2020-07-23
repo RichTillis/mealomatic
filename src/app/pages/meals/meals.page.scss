@@ -1,7 +1,9 @@
 .web-layout {
     display: none;
 }
-
+.min-height-10 {
+    --min-height: 10px;
+}
 .mobile-layout {
     // padding-left: 15px;
 
@@ -10,7 +12,20 @@
     }
 }
 
-ion-searchbar{
+ion-grid {
+    --ion-grid-padding: 0px;
+
+    ion-col {
+        --ion-grid-column-padding: 0px;
+    }
+}
+
+.sort {
+    --padding-start: 2px;
+    --padding-end: 0px;
+}
+
+ion-searchbar {
     color: var(--ion-color-primary);
 }
 
@@ -29,9 +44,9 @@ ion-card-title {
 
 .add-to-cart-button {
     --border-color: transparent;
-    --border-radius:50%;
+    --border-radius: 50%;
     height: 64px;
-    width: 64px;    
+    width: 64px;
 }
 
 app-animated-like {
@@ -59,12 +74,12 @@ app-animated-like {
 
     .add-to-cart-button {
         // --border-color: transparent;
-        --border-radius:50%;
+        --border-radius: 50%;
         height: 50px;
-        width: 50px;   
+        width: 50px;
         position: absolute;
 
         bottom: 0px;
-        right: 0px; 
+        right: 0px;
     }
 }
