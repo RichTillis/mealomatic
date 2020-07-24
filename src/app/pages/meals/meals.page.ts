@@ -24,6 +24,10 @@ export class MealsPage implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
 
+  filterLiked(){
+    console.log('I want to animate and fill/empty this when clicked!')
+  }
+
   createNewMeal() {
     this.presentNewMealModal();
   }

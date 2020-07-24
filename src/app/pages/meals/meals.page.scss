@@ -1,9 +1,21 @@
 .web-layout {
     display: none;
 }
+
 .min-height-10 {
     --min-height: 10px;
 }
+
+.min-height-2 {
+    --min-height: 2px;
+}
+
+ion-segment-button {
+    ion-icon {
+        color: var(--ion-color-primary);
+    }
+}
+
 .mobile-layout {
     // padding-left: 15px;
 
@@ -21,7 +33,7 @@ ion-grid {
 }
 
 .sort {
-    --padding-start: 2px;
+    --padding-start: 5px;
     --padding-end: 0px;
 }
 
