@@ -13,6 +13,7 @@ import { AuthService } from '../../auth/auth.service';
 export class MealsPage implements OnInit, OnDestroy {
 
   meals: Meal[];
+  currentSegmentSelected = "grid"
   constructor(public auth: AuthService, private mealService: MealService, public modalController: ModalController) { }
 
   ngOnInit() {
@@ -24,7 +25,7 @@ export class MealsPage implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
 
-  filterLiked(){
+  filterLiked() {
     console.log('I want to animate and fill/empty this when clicked!')
   }
 
@@ -35,8 +36,22 @@ export class MealsPage implements OnInit, OnDestroy {
   editMeal(mealId: string) {
     console.log('meal id: ', mealId);
   }
+
   segmentChanged(event: any) {
-    console.log(event);
+    console.log('Segment changed to: ', event.detail.value);
+    this.currentSegmentSelected = event.detail.value;
+  }
+
+  isGridDisplay() {
+    return "grid" === this.currentSegmentSelected;
+  }
+
+  isListDisplay() {
+    return "list" === this.currentSegmentSelected;
+  }
+
+  isSquareDisplay() {
+    return "square" === this.currentSegmentSelected;
   }
 
   async presentNewMealModal() {

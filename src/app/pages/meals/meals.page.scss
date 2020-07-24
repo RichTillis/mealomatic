@@ -6,14 +6,18 @@
     --min-height: 10px;
 }
 
-.min-height-2 {
-    --min-height: 2px;
+.min-height-1 {
+    --min-height: 1px;
 }
 
 ion-segment-button {
     ion-icon {
         color: var(--ion-color-primary);
     }
+}
+
+.list-thumbnail{
+    --size:96px;
 }
 
 .mobile-layout {
@@ -33,7 +37,7 @@ ion-grid {
 }
 
 .sort {
-    --padding-start: 5px;
+    --padding-start: 10px;
     --padding-end: 0px;
 }
 
