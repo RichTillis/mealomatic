@@ -8,6 +8,8 @@ import { MealsPageRoutingModule } from './meals-routing.module';
 
 import { MealsPage } from './meals.page';
 import { MealFormComponent } from './components/meal-form/meal-form.component';
+import { RecipeCardModule } from '../../components/recipe-card/recipe-card.module';
+
 import { AnimatedLikeModule } from '../../components/animated-like/animated-like.module';
 
 @NgModule({
@@ -16,7 +18,8 @@ import { AnimatedLikeModule } from '../../components/animated-like/animated-like
     FormsModule,
     IonicModule,
     MealsPageRoutingModule,
-    AnimatedLikeModule
+    AnimatedLikeModule,
+    RecipeCardModule
   ],
   declarations: [MealsPage, MealFormComponent]
 })

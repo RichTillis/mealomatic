@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SortMenuPageRoutingModule } from './sort-menu-routing.module';
+import { TestPageRoutingModule } from './test-routing.module';
 
-import { SortMenuPage } from './sort-menu.page';
+import { TestPage } from './test.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SortMenuPageRoutingModule
+    TestPageRoutingModule
   ],
-  declarations: [SortMenuPage]
+  declarations: [TestPage]
 })
-export class SortMenuPageModule {}
+export class TestPageModule {}

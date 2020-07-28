@@ -14,6 +14,7 @@ export class AppComponent {
     { title: "Home", url: "/home", icon: "home"},
     { title: "Menus", url: "/menus", icon: "list-circle"},
     { title: "Meals", url: "/meals", icon: "pizza"},
+    { title: "Test", url: "/test", icon: "analytics-outline"},
     
   ];
 

@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { SortMenuPage } from './sort-menu.page';
+import { RecipeCardComponent } from './recipe-card.component';
 
-describe('SortMenuPage', () => {
-  let component: SortMenuPage;
-  let fixture: ComponentFixture<SortMenuPage>;
+describe('RecipeCardComponent', () => {
+  let component: RecipeCardComponent;
+  let fixture: ComponentFixture<RecipeCardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SortMenuPage ],
+      declarations: [ RecipeCardComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SortMenuPage);
+    fixture = TestBed.createComponent(RecipeCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

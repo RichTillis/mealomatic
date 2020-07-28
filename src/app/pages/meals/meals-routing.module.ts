@@ -8,10 +8,6 @@ const routes: Routes = [
     path: '',
     component: MealsPage
   },
-  {
-    path: 'sort-menu',
-    loadChildren: () => import('./components/sort-menu/sort-menu.module').then( m => m.SortMenuPageModule)
-  }
 ];
 
 @NgModule({
