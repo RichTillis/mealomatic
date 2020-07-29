@@ -76,31 +76,27 @@
 
   <!-- MOBILE -->
   <div class="mobile-layout">
-    <div *ngFor="let meal of meals">
-      <ion-grid *ngIf="isGridDisplay()">
+
+    <div *ngIf="isGridDisplay()">
+      <ion-grid>
         <ion-row>
-          <ion-col size="6">
-            <ion-card>
+          <ion-col size="6" *ngFor="let meal of meals" >
+            <app-recipe-card [title]="meal.title" [subTitle]="meal.title" [image]="meal.image">
+            </app-recipe-card>
+            <!-- <ion-card>
               <ion-img [src]="meal.image"></ion-img>
               <ion-card-header>
                 <ion-card-title>{{meal.title}}</ion-card-title>
                 <ion-card-subtitle>Accompaniments here</ion-card-subtitle>
               </ion-card-header>
-            </ion-card>
-          </ion-col>
-          <ion-col size="6">
-            <ion-card>
-              <ion-img [src]="meal.image"></ion-img>
-              <ion-card-header>
-                <ion-card-title>{{meal.title}}</ion-card-title>
-                <ion-card-subtitle>Accompaniments here</ion-card-subtitle>
-              </ion-card-header>
-            </ion-card>
+            </ion-card> -->
           </ion-col>
         </ion-row>
       </ion-grid>
+    </div>
 
-      <ion-grid *ngIf="isListDisplay()">
+    <div *ngIf="isListDisplay()">
+      <ion-grid *ngFor="let meal of meals">
         <ion-row>
           <ion-col size="4">
             <ion-thumbnail class="list-thumbnail">
@@ -113,18 +109,23 @@
           </ion-col>
         </ion-row>
       </ion-grid>
+    </div>
 
-      <!-- <div *ngIf="isSquareDisplay()"> --> 
-        <app-recipe-card *ngIf="isSquareDisplay()" [title]="meal.title" [subTitle]="meal.title" [image]="meal.image"></app-recipe-card>
-        <!-- <ion-card>
+    <!-- <div *ngIf="isSquareDisplay()"> -->
+
+    <div *ngIf="isSquareDisplay()">
+      <app-recipe-card *ngFor="let meal of meals" [title]="meal.title" [subTitle]="meal.title" [image]="meal.image">
+      </app-recipe-card>
+    </div>
+
+    <!-- <ion-card>
           <ion-img [src]="meal.image"></ion-img>
           <ion-card-header>
             <ion-card-title>{{meal.title}}</ion-card-title>
             <ion-card-subtitle>Accompaniments here</ion-card-subtitle>
           </ion-card-header>
         </ion-card> -->
-      <!-- </div> -->
-    </div>
+    <!-- </div> -->
   </div>
 
 

@@ -23,16 +23,16 @@ ion-segment-button {
 .mobile-layout {
     // padding-left: 15px;
 
-    ion-row {
-        padding-top: 10px;
-    }
+    // ion-row {
+    //     padding-top: 10px;
+    // }
 }
 
 ion-grid {
     --ion-grid-padding: 0px;
 
     ion-col {
-        --ion-grid-column-padding: 0px;
+        --ion-grid-column-padding: 3px;
     }
 }
 

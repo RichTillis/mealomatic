@@ -3,7 +3,7 @@
     transition: 0.3s;
     border-radius: 15px;
     display: inline-block;
-    margin-top: 25px;
+    margin-top: 15px;
     position: relative;
     padding: 0;
 }
@@ -29,7 +29,8 @@
 }
 
 .card-title{
-    font-size: 1.5em;
+    font-size: 1.25rem;
+    // font-size:x-large;
     text-align: left;
     max-width: 275px;
     white-space: nowrap;
@@ -38,6 +39,6 @@
 }
 
 .card-subtitle {
-    font-size: .9em;
+    font-size: .75rem;
     max-width: 275px;
 }

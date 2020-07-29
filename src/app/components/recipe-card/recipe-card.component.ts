@@ -13,7 +13,6 @@ export class RecipeCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('img: ', this.image)
   }
 
 }
