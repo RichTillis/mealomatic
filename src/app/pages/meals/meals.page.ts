@@ -13,7 +13,7 @@ import { AuthService } from '../../auth/auth.service';
 export class MealsPage implements OnInit, OnDestroy {
 
   meals: Meal[];
-  currentSegmentSelected = "grid"
+  currentSegmentSelected = "list";
   constructor(public auth: AuthService, private mealService: MealService, public modalController: ModalController) { }
 
   ngOnInit() {
@@ -38,7 +38,7 @@ export class MealsPage implements OnInit, OnDestroy {
   }
 
   segmentChanged(event: any) {
-    console.log('Segment changed to: ', event.detail.value);
+    // console.log('Segment changed to: ', event.detail.value);
     this.currentSegmentSelected = event.detail.value;
   }
 

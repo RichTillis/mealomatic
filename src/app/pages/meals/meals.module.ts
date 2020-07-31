@@ -9,6 +9,7 @@ import { MealsPageRoutingModule } from './meals-routing.module';
 import { MealsPage } from './meals.page';
 import { MealFormComponent } from './components/meal-form/meal-form.component';
 import { RecipeCardModule } from '../../components/recipe-card/recipe-card.module';
+import { RecipeListCardModule } from '../../components/recipe-list-card/recipe-list-card.module';
 
 import { AnimatedLikeModule } from '../../components/animated-like/animated-like.module';
 
@@ -19,7 +20,8 @@ import { AnimatedLikeModule } from '../../components/animated-like/animated-like
     IonicModule,
     MealsPageRoutingModule,
     AnimatedLikeModule,
-    RecipeCardModule
+    RecipeCardModule,
+    RecipeListCardModule
   ],
   declarations: [MealsPage, MealFormComponent]
 })
