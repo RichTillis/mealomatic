@@ -10,22 +10,31 @@
     --min-height: 1px;
 }
 
-ion-segment-button {
-    ion-icon {
-        color: var(--ion-color-primary);
-    }
+// ion-segment-button {
+//     ion-icon {
+//         color: var(--ion-color-primary);
+//     }
+// }
+
+ion-content{
+    --background: whitesmoke;
 }
 
-.list-thumbnail{
-    --size:96px;
+.list-thumbnail {
+    --size: 96px;
 }
 
 .mobile-layout {
+    
     // padding-left: 15px;
 
     // ion-row {
     //     padding-top: 10px;
     // }
+}
+
+.padding-top-10 {
+    padding-top: 10px;
 }
 
 ion-grid {
