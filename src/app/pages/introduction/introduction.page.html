@@ -1,0 +1,52 @@
+<ion-content>
+  <ion-slides pager="true">
+
+    <!-- Slide 1 -->
+    <ion-slide>
+      <ion-text color="light" class="intro-text">
+        <h1>Welcome to Mealomatic!</h1>
+        <p>The quick-pick meals app</p>
+      </ion-text>
+      <!-- <img src="assets/imgs/intro_1.jpg"> -->
+    </ion-slide>
+
+    <!-- Slide 2 -->
+    <ion-slide>
+      <img src="assets/imgs/intro_3.png">
+      <ion-text color="light" class="intro-text">
+        <h1>Easily plan your meals</h1>
+        <p>Just pick your favorites and go</p>
+      </ion-text>
+    </ion-slide>
+
+    <!-- Slide 3 -->
+    <ion-slide>
+      <img src="assets/imgs/intro_2.png">
+      <ion-text color="light" class="intro-text">
+        <h1>Get everyone involved!</h1>
+        <p>The whole family can help decide what to eat</p>
+      </ion-text>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+
+<ion-footer>
+  <ion-row class="ion-padding">
+    <ion-col size="6" class="ion-text-left">
+      <ion-button color="light" fill="outline" (click)="openSignup()">
+        Sign Up
+      </ion-button>
+    </ion-col>
+    <ion-col size="6" class="ion-text-right">
+      <ion-button color="light" fill="outline" (click)="openLogin()">
+        Log In
+      </ion-button>
+    </ion-col>
+    <ion-col size="12" class="ion-text-center ion-margin-top ion-margin-bottom">
+      <ion-text color="light">
+        By signing up, you agree to our <a href="#" (click)="openTerms($event)">Terms of Service</a> and <a href="#"
+          (click)="openPrivacy($event)">Privacy Policy</a>.
+      </ion-text>
+    </ion-col>
+  </ion-row>
+</ion-footer>

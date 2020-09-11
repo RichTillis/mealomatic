@@ -3,7 +3,7 @@ import { MealService } from '../../services/meal/meal.service';
 import { ModalController } from '@ionic/angular';
 import { Meal } from 'src/app/interfaces/meal';
 import { MealCreatePage } from '../meal-create/meal-create.page';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-meals',

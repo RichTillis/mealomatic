@@ -1,0 +1,13 @@
+{
+  "appId": "com.turvick.mealomatic",
+  "appName": "mealomatic",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}
