@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { CurrentMenuPageRoutingModule } from './current-menu-routing.module';
 
 import { CurrentMenuPage } from './current-menu.page';
+import { SharedComponentsModule } from 'src/app/components/shared-components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CurrentMenuPageRoutingModule
+    CurrentMenuPageRoutingModule,
+    SharedComponentsModule
   ],
   declarations: [CurrentMenuPage]
 })
-export class CurrentMenuPageModule {}
+export class CurrentMenuPageModule { }

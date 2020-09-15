@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModalBaseComponent } from './modal-base/modal-base.component';
 import { IonicModule } from '@ionic/angular';
 
+import { ModalBaseComponent } from './modal-base/modal-base.component';
+import { ProfileIconComponent } from './profile-icon/profile-icon.component';
+
 @NgModule({
-  declarations: [ModalBaseComponent],
+  declarations: [ModalBaseComponent, ProfileIconComponent],
   imports: [CommonModule, IonicModule],
-  exports: [ModalBaseComponent],
+  exports: [ModalBaseComponent, ProfileIconComponent],
 })
 export class SharedComponentsModule { }

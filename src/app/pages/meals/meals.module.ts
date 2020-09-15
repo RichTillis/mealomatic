@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
+import { SharedComponentsModule } from 'src/app/components/shared-components.module';
 
 import { MealsPageRoutingModule } from './meals-routing.module';
 
@@ -21,7 +22,8 @@ import { AnimatedLikeModule } from '../../components/animated-like/animated-like
     MealsPageRoutingModule,
     AnimatedLikeModule,
     RecipeCardModule,
-    RecipeListCardModule
+    RecipeListCardModule,    
+    SharedComponentsModule
   ],
   declarations: [MealsPage, MealFormComponent]
 })

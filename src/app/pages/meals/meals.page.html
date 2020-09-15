@@ -1,25 +1,15 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      All Your Meals
+      All My Meals
     </ion-title>
-    <ion-buttons slot="start">
+    <!-- <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-icon name="person-circle-outline" size="large"></ion-icon>
-    </ion-buttons>
-    <!-- <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
-      </ion-button>
-      <ion-button (click)="auth.login()" *ngIf="!auth.loggedIn" color="primary" fill="outline">Login
-        <ion-icon slot="end" name="log-in"></ion-icon>
-      </ion-button>
-      <ion-button *ngIf="auth.loggedIn">
-        <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
-      </ion-button>
     </ion-buttons> -->
+    <ion-buttons slot="end">
+      <app-profile-icon></app-profile-icon>
+    </ion-buttons>
+
   </ion-toolbar>
   <ion-grid>
     <ion-row>

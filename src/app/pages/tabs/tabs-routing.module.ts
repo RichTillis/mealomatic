@@ -23,18 +23,6 @@ const routes: Routes = [
         loadChildren: () =>
           import('../menus/menus.module').then(m => m.MenusPageModule),
       },
-      // {
-      //   path: 'notifications',
-      //   loadChildren: () =>
-      //     import('../notifications/notifications.module').then(
-      //       m => m.NotificationsPageModule
-      //     ),
-      // },
-      {
-        path: 'account',
-        loadChildren: () =>
-          import('../account/account.module').then(m => m.AccountPageModule),
-      },
       {
         path: '',
         redirectTo: 'current',
