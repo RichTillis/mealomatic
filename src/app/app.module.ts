@@ -16,7 +16,11 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import {AccountPageModule} from './pages/account/account.module';
+import { AccountPageModule } from './pages/account/account.module';
+
+//these need to be lazy loaded somewhere...
+import { MealCreatePageModule } from './pages/meal-create/meal-create.module';
+import { MealEditPageModule } from './pages/meal-edit/meal-edit.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +35,9 @@ import {AccountPageModule} from './pages/account/account.module';
     ReactiveFormsModule,
     AngularFireStorageModule,
     BrowserAnimationsModule,
-    AccountPageModule
+    AccountPageModule,
+    MealCreatePageModule,
+    MealEditPageModule
   ],
   providers: [
     StatusBar,

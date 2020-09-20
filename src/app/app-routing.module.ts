@@ -26,6 +26,10 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin),
     loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule)
   },
+  // {
+  //   path: 'meal-create-two',
+  //   loadChildren: () => import('./pages/meal-create-two/meal-create-two.module').then( m => m.MealCreateTwoPageModule)
+  // },
 ];
 
 @NgModule({

@@ -5,7 +5,6 @@ import { Meal } from 'src/app/interfaces/meal';
 import { MealCreatePage } from '../meal-create/meal-create.page';
 import { AuthService } from '../../services/auth/auth.service';
 import { ModalBaseComponent } from 'src/app/components/modal-base/modal-base.component';
-import { AccountPage } from '../account/account.page';
 
 @Component({
   selector: 'app-meals',
@@ -17,11 +16,11 @@ export class MealsPage implements OnInit, OnDestroy {
   meals: Meal[];
   currentSegmentSelected = "list";
   constructor(
-    public auth: AuthService, 
-    private mealService: MealService, 
-    public modalController: ModalController, 
+    public auth: AuthService,
+    private mealService: MealService,
+    public modalController: ModalController,
     private routerOutlet: IonRouterOutlet
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.mealService.meals.subscribe((data: any) => {
@@ -36,9 +35,9 @@ export class MealsPage implements OnInit, OnDestroy {
     console.log('I want to animate and fill/empty this when clicked!')
   }
 
-  createNewMeal() {
-    this.presentNewMealModal();
-  }
+  // createNewMeal() {
+  //   this.presentNewMealModal();
+  // }
 
   editMeal(mealId: string) {
     console.log('meal id: ', mealId);
@@ -61,22 +60,27 @@ export class MealsPage implements OnInit, OnDestroy {
     return "square" === this.currentSegmentSelected;
   }
 
-  async presentNewMealModal() {
-    const modal = await this.modalController.create({
-      component: MealCreatePage
-    });
-    return await modal.present();
-  }
+  // async presentNewMealModal() {
+  //   const modal = await this.modalController.create({
+  //     component: MealCreatePage
+  //   });
+  //   return await modal.present();
+  // }
 
-  async openAccount() {
+  async createNewMeal() {
     const modal = await this.modalController.create({
       component: ModalBaseComponent,
       presentingElement: this.routerOutlet.nativeEl,
       swipeToClose: true,
       componentProps: {
-        rootPage: AccountPage,
+        rootPage: MealCreatePage,
       },
     });
+
+    modal.onDidDismiss().then((res: any) => {
+      //TODO: Handle returned data!
+    });
+
     await modal.present();
   }
 

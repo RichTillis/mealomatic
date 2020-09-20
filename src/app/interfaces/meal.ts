@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 export interface Meal {
   id?: string;
   title: string;
-  image?: Observable<string>;
+  accompaniments?: string;
+  imageURL?: Observable<string>;
   description?: string;
 }

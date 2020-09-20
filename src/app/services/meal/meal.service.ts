@@ -27,7 +27,7 @@ export class MealService {
   // }
 
   addMeal(meal: Meal) {
-    meal.id = this.afs.createId();
+    // meal.id = this.afs.createId();
     return this.mealsCollection.doc(meal.id).set(meal);
   }
 

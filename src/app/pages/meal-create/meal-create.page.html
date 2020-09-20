@@ -1,33 +1,44 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button (click)="closeModal()">
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title>Create a New Meal</ion-title>
-    <ion-buttons slot="end">
-      <ion-button type="submit" [disabled]="mealForm.invalid" color="success" (click)="createMeal()">
-        <ion-icon slot="icon-only" name="checkmark-circle-sharp"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form [formGroup]="mealForm" (ngSubmit)="createMeal()" novalidate>
+
+  <form [formGroup]="mealForm" (ngSubmit)="createMeal()">
+    
+    <ion-img [src]="testImage"></ion-img>
+    <ion-item button (click)="changeImage()" detail="false">
+      <ion-icon name="image-outline" slot="start"></ion-icon>
+      Change Meal Image
+    </ion-item>
 
     <ion-item>
-      <ion-input formControlName="title" placeholder="Title (required)" type="text"></ion-input>
+      <ion-label position="stacked">Meal Title</ion-label>
+      <ion-input formControlName="title" placeholder="What's the main meal component" type="text"></ion-input>
     </ion-item>
-    <div>
-      <ng-container *ngFor="let validation of validation_messages.title">
-        <div class="error-message"
-          *ngIf="mealForm.get('title').hasError(validation.type) && (mealForm.get('title').dirty || mealForm.get('title').touched)">
-          {{ validation.message }}
-        </div>
-      </ng-container>
-    </div>
-    <app-image-crop (imageChanged)="processNewImage($event)"></app-image-crop>
+
+    <ion-item>
+      <ion-label position="stacked">Accompaniments</ion-label>
+      <ion-input formControlName="accompaniments" placeholder="What goes with it?" type="text"></ion-input>
+    </ion-item>
+
+    <!-- <app-image-crop (imageChanged)="processNewImage($event)"></app-image-crop> -->
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10">
+        <ion-button expand="block" type="submit" [disabled]="!mealForm.valid">
+          Save Meal
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
   </form>
+
 </ion-content>

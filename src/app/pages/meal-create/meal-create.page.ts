@@ -1,6 +1,6 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Component, OnInit, NgZone, SimpleChanges } from '@angular/core';
+import { ModalController, LoadingController } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MealService } from '../../services/meal/meal.service';
 import { Meal } from 'src/app/interfaces/meal';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -26,6 +26,7 @@ import { CompressorService } from '../../services/compressor/compressor.service'
 export class MealCreatePage implements OnInit {
   mealForm: FormGroup;
   mealImage: any;
+  testImage: string = 'assets/default-meal-meal.jpg';
 
   validation_messages = {
     title: [
@@ -33,18 +34,19 @@ export class MealCreatePage implements OnInit {
     ],
   };
 
-  constructor(private zone: NgZone,
+  constructor(
     public formBuilder: FormBuilder,
     public modalController: ModalController,
     private mealService: MealService,
     private fireStorage: AngularFireStorage,
+    private loadingController: LoadingController,
     private compressorService: CompressorService) {
   }
 
   ngOnInit() {
     this.mealForm = this.formBuilder.group({
       title: ["", Validators.required],
-      mealImage: [null]
+      accompaniments: [""]
     });
   }
 
@@ -54,12 +56,14 @@ export class MealCreatePage implements OnInit {
     });
   }
 
+  //should go into an image service
   compress(image: File) {
     let width = 600;
     let type = 'jpeg';
     return this.compressorService.compress(image, width, type)
   }
 
+  //should go into an image service
   processNewImage(event) {
     // console.log(event);
     let newImage = event;
@@ -75,13 +79,15 @@ export class MealCreatePage implements OnInit {
     });
   }
 
-  createMeal() {
-    let title: string = this.mealForm.get("title").value;
-    let id = this.mealService.createId();
+  async createMeal() {
+    const title: string = this.mealForm.get("title").value;
+    const accompaniments: string = this.mealForm.get("accompaniments").value;
+    const id = this.mealService.createId();
 
     let newMeal: Meal = {
       id: id,
-      title: title
+      title: title,
+      accompaniments: accompaniments
     };
 
     if (this.mealImage) {
@@ -89,18 +95,18 @@ export class MealCreatePage implements OnInit {
       this.fireStorage.upload(filePath, this.mealImage).then(() => {
         const imageRef = this.fireStorage.ref(filePath);
         imageRef.getDownloadURL().subscribe(url => {
-          newMeal.image = url;
-          this.mealService.addMeal(newMeal).then(() => {
-            this.closeModal();
-          })
+          newMeal.imageURL = url;
+          // this.mealService.addMeal(newMeal).then(() => {
+          //   this.closeModal();
+          // })
         })
       }).catch(err => alert(err));
     }
-    else {
-      this.mealService.addMeal(newMeal).then(() => {
-        this.closeModal();
-      })
-    }
+
+    this.mealService.addMeal(newMeal).then(() => {
+      this.closeModal();
+    });
+
   }
 
 }
