@@ -3,8 +3,15 @@ import { ModalController, LoadingController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MealService } from '../../services/meal/meal.service';
 import { Meal } from 'src/app/interfaces/meal';
-import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { CompressorService } from '../../services/compressor/compressor.service';
+import { ImageService } from '../../services/image/image.service';
+import { Plugins, CameraResultType, CameraPhoto } from '@capacitor/core';
+
+import { of, from } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+
+const { Camera } = Plugins;
 
 // references
 // https://www.talkingdotnet.com/show-image-preview-before-uploading-using-angular-7/
@@ -26,7 +33,9 @@ import { CompressorService } from '../../services/compressor/compressor.service'
 export class MealCreatePage implements OnInit {
   mealForm: FormGroup;
   mealImage: any;
-  testImage: string = 'assets/default-meal-meal.jpg';
+  newMealImage: string = '';
+  newMealImageData: CameraPhoto;
+  dummyMealImage: string = 'assets/default-meal-meal.jpg';
 
   validation_messages = {
     title: [
@@ -79,6 +88,17 @@ export class MealCreatePage implements OnInit {
     });
   }
 
+  async changeMealImage() {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.Base64,
+    });
+
+    this.newMealImage = 'data:image/jpeg;base64,' + image.base64String;
+    this.newMealImageData = image;
+  }
+
   async createMeal() {
     const title: string = this.mealForm.get("title").value;
     const accompaniments: string = this.mealForm.get("accompaniments").value;
@@ -90,23 +110,26 @@ export class MealCreatePage implements OnInit {
       accompaniments: accompaniments
     };
 
-    if (this.mealImage) {
-      const filePath = `/images/${id}`;
-      this.fireStorage.upload(filePath, this.mealImage).then(() => {
-        const imageRef = this.fireStorage.ref(filePath);
-        imageRef.getDownloadURL().subscribe(url => {
-          newMeal.imageURL = url;
-          // this.mealService.addMeal(newMeal).then(() => {
-          //   this.closeModal();
-          // })
-        })
-      }).catch(err => alert(err));
+    if (this.newMealImage) {
+      const filePath = `${this.mealService.basePath}/${id}`;
+      const fileRef = this.fireStorage.ref(filePath);
+      const task: AngularFireUploadTask = fileRef.putString(
+        this.newMealImageData.base64String,
+        'base64',
+        { contentType: 'image/png' }
+      )
+      //https://stackoverflow.com/questions/50541836/property-downloadurl-does-not-exist-on-type-angularfireuploadtask/50663965
+      const loading = await this.loadingController.create();
+      await loading.present();
+      await task;
+      console.log('Image uploaded');
+      newMeal.imageURL = await fileRef.getDownloadURL().toPromise();
+      this.loadingController.dismiss();
     }
 
     this.mealService.addMeal(newMeal).then(() => {
       this.closeModal();
     });
-
   }
 
 }

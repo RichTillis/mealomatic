@@ -70,7 +70,7 @@
     <div *ngIf="isListDisplay()">
       <div *ngFor="let meal of meals" class="padding-top-10">
         <app-recipe-list-card [title]="meal.title" [subTitle]="meal.title"
-          [image]="meal.image">
+          [image]="meal.imageURL">
         </app-recipe-list-card>
       </div>
       <!-- <ion-grid *ngFor="let meal of meals">

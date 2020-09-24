@@ -12,9 +12,13 @@
 <ion-content class="ion-padding">
 
   <form [formGroup]="mealForm" (ngSubmit)="createMeal()">
-    
-    <ion-img [src]="testImage"></ion-img>
-    <ion-item button (click)="changeImage()" detail="false">
+
+    <ion-img [src]="newMealImage" *ngIf="newMealImage; else dummy"></ion-img>
+    <ng-template #dummy>
+      <ion-img [src]="dummyMealImage"></ion-img>
+    </ng-template>
+
+    <ion-item button (click)="changeMealImage()" detail="false">
       <ion-icon name="image-outline" slot="start"></ion-icon>
       Change Meal Image
     </ion-item>

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { Meal } from '../../interfaces/meal';
 
@@ -11,7 +12,7 @@ import { Meal } from '../../interfaces/meal';
 export class MealService {
   private mealsCollection: AngularFirestoreCollection<Meal>;
   meals: Observable<Meal[]>;
-  private basePath = '/images';
+  public basePath = '/meal-images';
   downloadableURL = '';
   private task: AngularFireUploadTask;
 
@@ -31,7 +32,7 @@ export class MealService {
     return this.mealsCollection.doc(meal.id).set(meal);
   }
 
-  createId(){
+  createId() {
     return this.afs.createId();
   }
 
@@ -48,6 +49,19 @@ export class MealService {
       alert('No images selected');
       this.downloadableURL = '';
     }
+  }
+
+  async uploadMealImage(image: any) {
+
+    const filePath = `${this.basePath}/${image.name}`;
+    const fileRef = this.fireStorage.ref(filePath);
+    const task: AngularFireUploadTask = fileRef.putString(
+      image.base64String,
+      'base64',
+      { contentType: 'image/png' }
+    );
+
+    (await task).ref.getDownloadURL().then(url => { this.downloadableURL = url; });
   }
 
 }
