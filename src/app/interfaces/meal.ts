@@ -4,6 +4,7 @@ export interface Meal {
   id?: string;
   title: string;
   accompaniments?: string;
-  imageURL?: Observable<string>;
+  // imageURL?: Observable<string>;
+  imageURL?: string;
   description?: string;
 }

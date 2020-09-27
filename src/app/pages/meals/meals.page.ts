@@ -3,6 +3,7 @@ import { MealService } from '../../services/meal/meal.service';
 import { ModalController, IonRouterOutlet } from '@ionic/angular';
 import { Meal } from 'src/app/interfaces/meal';
 import { MealCreatePage } from '../meal-create/meal-create.page';
+import { MealEditPage } from '../meal-edit/meal-edit.page';
 import { AuthService } from '../../services/auth/auth.service';
 import { ModalBaseComponent } from 'src/app/components/modal-base/modal-base.component';
 
@@ -35,12 +36,24 @@ export class MealsPage implements OnInit, OnDestroy {
     console.log('I want to animate and fill/empty this when clicked!')
   }
 
-  // createNewMeal() {
-  //   this.presentNewMealModal();
-  // }
-
-  editMeal(mealId: string) {
-    console.log('meal id: ', mealId);
+  async editMeal(meal: Meal) {
+    console.log('meal id: ', meal.id);
+    const modal = await this.modalController.create({
+      component: MealEditPage,
+      presentingElement: this.routerOutlet.nativeEl,
+      swipeToClose: true,
+      componentProps: {
+        meal: meal
+      },
+    });
+    await modal.present();
+    modal.onDidDismiss().then((res: any) => {
+      // if (res.data && res.data.remove) {
+      //   this.boardService.closeBoard(this.board.id).then(() => {
+      //     this.navCtrl.pop();
+      //   });
+      // }
+    });
   }
 
   segmentChanged(event: any) {

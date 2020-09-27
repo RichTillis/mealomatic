@@ -1,12 +1,15 @@
 <div class="card">
-  <img [src]="image" alt="Meal Image" class="card-image">
+  <ion-img [src]="meal.imageURL" alt="Meal Image" *ngIf="meal.imageURL; else dummy"></ion-img>
+  <ng-template #dummy>
+    <ion-img [src]="dummyMealImage"></ion-img>
+  </ng-template>
 
   <div class="card-title-container">
     <div class="card-title">
-      {{title}}
+      {{meal.title}}
     </div>
     <div class="card-subtitle">
-      Accompaniments here 
+      {{meal.accompaniments}}
     </div>
   </div>
 </div>

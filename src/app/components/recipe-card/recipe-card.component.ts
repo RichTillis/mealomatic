@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Meal } from 'src/app/interfaces/meal';
 
 @Component({
   selector: 'app-recipe-card',
@@ -6,9 +7,9 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./recipe-card.component.scss'],
 })
 export class RecipeCardComponent implements OnInit {
-  @Input() title: string;
-  @Input() subTitle: string;
-  @Input() image: string;
+  @Input() meal: Meal;
+  
+  dummyMealImage: string = 'assets/default-meal-meal.jpg';
 
   constructor() { }
 

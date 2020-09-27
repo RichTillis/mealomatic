@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-button (click)="close()" color="primary">
+      <ion-button (click)="close()">
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -12,19 +12,14 @@
 <ion-content>
   <div class="hero ion-text-center ion-padding-top" *ngIf="user">
     <h2>{{ user.displayName }}</h2>
-    <ion-row class="ion-justify-content-center">
-      <ion-col size="2">
-        <ion-avatar *ngIf="user.photoURL; else dummy">
-          <img [src]="user.photoURL" />
-        </ion-avatar>
-        <ng-template #dummy>
-          <ion-avatar>
-            <img [src]="dummyAvatar" />
-          </ion-avatar>
-        </ng-template>
-      </ion-col>
-    </ion-row>
-    <p>{{ user.uid }}</p>
+    <ion-avatar *ngIf="user.photoURL; else dummy">
+      <img [src]="user.photoURL" />
+    </ion-avatar>
+    <ng-template #dummy>
+      <ion-avatar>
+        <img [src]="dummyAvatar" />
+      </ion-avatar>
+    </ng-template>
   </div>
 
   <ion-item button (click)="changeAvatar()" detail="false">

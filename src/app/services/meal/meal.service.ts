@@ -22,13 +22,11 @@ export class MealService {
     this.meals = this.mealsCollection.valueChanges();
   }
 
-  // updateMeal(meal:Meal){
-  //   this.itemDoc = afs.doc<Item>('items/1');
-  //   this.mealsCollection.ref.update(meal);
-  // }
+  updateMeal(meal:Meal){
+    return this.mealsCollection.doc(meal.id).update(meal);
+  }
 
   addMeal(meal: Meal) {
-    // meal.id = this.afs.createId();
     return this.mealsCollection.doc(meal.id).set(meal);
   }
 
