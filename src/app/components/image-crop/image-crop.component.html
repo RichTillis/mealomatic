@@ -1,13 +1,21 @@
-<div *ngIf="!imageChangedEvent" class="input-file-container">
-  <input id="upload-image" class="inputfile" type="file" name="upload-image" (change)="fileChangeEvent($event)" />
+<div *ngIf="!imageBase64String" >
+  <!-- <input id="upload-image" class="inputfile" type="file" name="upload-image" (change)="fileChangeEvent($event)" />
   <label for="upload-image">
-    <ion-icon name="cloud-upload-sharp"></ion-icon> Select an image...
-  </label>
+    <ion-icon name="image-outline"></ion-icon> Change image...
+  </label> -->
+
+  <ion-item button (click)="changeImage()" detail="false">
+    <ion-icon name="image-outline" slot="start"></ion-icon>
+    Change Image
+  </ion-item>
 </div>
 
 <ion-card>
-  <ion-toolbar color="primary" *ngIf="imageChangedEvent">
+  <ion-toolbar color="primary" *ngIf="imageBase64String">
     <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
       <ion-button (click)="rotateRight()">
         <ion-icon slot="icon-only" name="chevron-forward-circle-sharp"></ion-icon>
       </ion-button>
@@ -19,11 +27,15 @@
       <ion-button (click)="clearImage()">
         <ion-icon slot="icon-only" name="close-circle-sharp"></ion-icon>
       </ion-button>
+      <ion-button (click)="confirmImageCrop()">
+        <ion-icon slot="icon-only" name="checkmark-circle"></ion-icon>      
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-card-content *ngIf="imageChangedEvent">
+  <!-- <ion-card-content *ngIf="imageChangedEvent"> -->
+  <ion-card-content *ngIf="imageBase64String">
     <image-cropper 
-             [imageChangedEvent]="imageChangedEvent" 
+             [imageBase64]="imageBase64String" 
              [maintainAspectRatio]="true"
              [containWithinAspectRatio]="containWithinAspectRatio" 
              [aspectRatio]="4 / 4" 
@@ -41,6 +53,25 @@
              (cropperReady)="cropperReady($event)"
              (loadImageFailed)="loadImageFailed()">
     </image-cropper>
+    <!-- <image-cropper 
+             [imageChangedEvent]="imageChangedEvent" 
+             [maintainAspectRatio]="true"
+             [containWithinAspectRatio]="containWithinAspectRatio" 
+             [aspectRatio]="4 / 4" 
+             [resizeToWidth]="600"
+             [cropperMinWidth]="128" 
+             [onlyScaleDown]="true" 
+             [roundCropper]="false" 
+             [canvasRotation]="canvasRotation"
+             [transform]="transform" 
+             [alignImage]="'left'" 
+             [style.display]="showCropper ? null : 'none'" 
+             format="png"
+             (imageCropped)="imageCropped($event)" 
+             (imageLoaded)="imageLoaded()" 
+             (cropperReady)="cropperReady($event)"
+             (loadImageFailed)="loadImageFailed()">
+    </image-cropper> -->
 
   </ion-card-content>
 </ion-card>

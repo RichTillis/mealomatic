@@ -13,15 +13,17 @@
 
   <form [formGroup]="mealForm" (ngSubmit)="createMeal()">
 
-    <ion-img [src]="newMealImage" *ngIf="newMealImage; else dummy"></ion-img>
+    <ion-img [src]="newMealImageBase64" *ngIf="newMealImageBase64; else dummy" ></ion-img>
     <ng-template #dummy>
       <ion-img [src]="dummyMealImage"></ion-img>
     </ng-template>
 
-    <ion-item button (click)="changeMealImage()" detail="false">
+    <app-image-crop (imageChanged)="processNewImage($event)"></app-image-crop>
+
+    <!-- <ion-item button (click)="changeMealImage()" detail="false">
       <ion-icon name="image-outline" slot="start"></ion-icon>
       Change Meal Image
-    </ion-item>
+    </ion-item> -->
 
     <ion-item>
       <ion-label position="stacked">Meal Title</ion-label>
@@ -32,8 +34,6 @@
       <ion-label position="stacked">Accompaniments</ion-label>
       <ion-input formControlName="accompaniments" placeholder="What goes with it?" type="text"></ion-input>
     </ion-item>
-
-    <!-- <app-image-crop (imageChanged)="processNewImage($event)"></app-image-crop> -->
 
     <ion-row class="ion-justify-content-center">
       <ion-col size="10">

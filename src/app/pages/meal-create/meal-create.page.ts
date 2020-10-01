@@ -34,6 +34,7 @@ export class MealCreatePage implements OnInit {
   mealForm: FormGroup;
   mealImage: any;
   newMealImage: string = '';
+  newMealImageBase64: string = '';
   newMealImageData: CameraPhoto;
   dummyMealImage: string = 'assets/default-meal-meal.jpg';
 
@@ -68,24 +69,28 @@ export class MealCreatePage implements OnInit {
   //should go into an image service
   compress(image: File) {
     let width = 600;
-    let type = 'jpeg';
+    let type = 'png';
     return this.compressorService.compress(image, width, type)
   }
 
   //should go into an image service
-  processNewImage(event) {
-    // console.log(event);
-    let newImage = event;
-    this.compress(newImage).subscribe(res => {
-      let reader = new FileReader();
-      reader.readAsDataURL(res);
-      reader.onload = () => {
-        this.mealImage = res;
-        // this.zone.run(() => {
-        //   this.mealImage = res;
-        // })
-      };
-    });
+  processNewImage(event: string) {
+    this.newMealImageBase64 = event;
+
+    //eventually do this - see if we can compress it further
+
+    // this.compress(event).subscribe(res => {
+    //   console.log('res' ,res);
+    //   let reader = new FileReader();
+    //   reader.readAsDataURL(res);
+    //   reader.onload = () => {
+    //     console.log(res);
+    //     this.newMealImageBase64 = 'data:image/jpg;base64,' + res;
+    //     // this.zone.run(() => {
+    //     //   this.mealImage = res;
+    //     // })
+    //   };
+    // });
   }
 
   async changeMealImage() {
@@ -110,11 +115,11 @@ export class MealCreatePage implements OnInit {
       accompaniments: accompaniments
     };
 
-    if (this.newMealImage) {
+    if (this.newMealImageBase64) {
       const filePath = `${this.mealService.basePath}/${id}`;
       const fileRef = this.fireStorage.ref(filePath);
       const task: AngularFireUploadTask = fileRef.putString(
-        this.newMealImageData.base64String,
+        this.newMealImageBase64.replace("data:image/png;base64,", ""),
         'base64',
         { contentType: 'image/png' }
       )

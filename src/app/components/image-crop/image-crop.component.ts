@@ -1,5 +1,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { ImageCroppedEvent, Dimensions, ImageTransform, base64ToFile } from 'ngx-image-cropper';
+import { Plugins, CameraResultType, CameraPhoto } from '@capacitor/core';
+
+const { Camera } = Plugins;
 
 @Component({
   selector: 'app-image-crop',
@@ -8,11 +11,12 @@ import { ImageCroppedEvent, Dimensions, ImageTransform, base64ToFile } from 'ngx
 })
 export class ImageCropComponent {
   @Output()
-  imageChanged  = new EventEmitter();
+  imageChanged = new EventEmitter();
 
   constructor() { }
 
   imageChangedEvent: any = '';
+  imageBase64String: string = '';
   croppedImage: any = '';
   canvasRotation = 0;
   rotation = 0;
@@ -21,14 +25,29 @@ export class ImageCropComponent {
   containWithinAspectRatio = false;
   transform: ImageTransform = {};
 
+  async changeImage() {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.Base64,
+    });
+    this.imageBase64String = 'data:image/png;base64,' + image.base64String;
+    // this.newMealImage = 'data:image/jpeg;base64,' + image.base64String;
+    // this.newMealImageData = image;
+  }
+
   fileChangeEvent(event: any): void {
+    // console.log('event: ', event);
     this.imageChangedEvent = event;
   }
 
   imageCropped(event: ImageCroppedEvent) {
-   
-    this.croppedImage = base64ToFile(event.base64);
-    this.imageChanged.emit(this.croppedImage);
+
+    // this.croppedImage = base64ToFile(event.base64);
+    // console.log(event.base64);
+    this.croppedImage = event.base64;
+    // console.log(this.croppedImage);
+    // this.imageChanged.emit(this.croppedImage);
   }
 
   imageLoaded() {
@@ -117,4 +136,15 @@ export class ImageCropComponent {
     console.log('Load failed');
   }
 
+  confirmImageCrop() {
+    //strip data:image/jpeg;base64,
+    // string.replace('data:image/jpeg;base64,', '');
+    this.imageChanged.emit(this.croppedImage);
+    // this.imageChanged.emit(base64ToFile(this.croppedImage));
+    this.imageBase64String = '';
+  }
+
+  close(){
+    this.imageBase64String = '';
+  }
 }
