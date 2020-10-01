@@ -37,6 +37,7 @@ export class MealCreatePage implements OnInit {
   newMealImageBase64: string = '';
   newMealImageData: CameraPhoto;
   dummyMealImage: string = 'assets/default-meal-meal.jpg';
+  showMealImage: boolean = true;
 
   validation_messages = {
     title: [
@@ -91,6 +92,10 @@ export class MealCreatePage implements OnInit {
     //     // })
     //   };
     // });
+  }
+
+  toggleMealImage(newImageCroppingStartedEvent: boolean) {
+    this.showMealImage = !newImageCroppingStartedEvent;
   }
 
   async changeMealImage() {

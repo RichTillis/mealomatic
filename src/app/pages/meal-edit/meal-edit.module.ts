@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
 
 import { MealEditPageRoutingModule } from './meal-edit-routing.module';
-
 import { MealEditPage } from './meal-edit.page';
+import { ImageCropModule } from '../../components/image-crop/image-crop.module'
+
 
 @NgModule({
   imports: [
@@ -14,7 +14,8 @@ import { MealEditPage } from './meal-edit.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    MealEditPageRoutingModule
+    MealEditPageRoutingModule,
+    ImageCropModule
   ],
   declarations: [MealEditPage]
 })

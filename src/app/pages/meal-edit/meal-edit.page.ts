@@ -35,8 +35,10 @@ export class MealEditPage implements OnInit {
   mealForm: FormGroup;
   mealImage: string;
   newMealImage: string = '';
+  newMealImageBase64: string = '';
   newMealImageData: CameraPhoto;
   dummyMealImage: string = 'assets/default-meal-meal.jpg';
+  showMealImage: boolean = true;
 
   validation_messages = {
     title: [
@@ -75,33 +77,41 @@ export class MealEditPage implements OnInit {
   }
 
   //should go into an image service
-  processNewImage(event) {
+  processNewImage(event: string) {
+    this.mealImage = event;
+    this.newMealImageBase64 = event;
     // console.log(event);
-    let newImage = event;
-    this.compress(newImage).subscribe(res => {
-      let reader = new FileReader();
-      reader.readAsDataURL(res);
-      reader.onload = () => {
-        this.mealImage = res;
-        // this.zone.run(() => {
-        //   this.mealImage = res;
-        // })
-      };
-    });
+    // let newImage = event;
+    // this.compress(newImage).subscribe(res => {
+    //   let reader = new FileReader();
+    //   reader.readAsDataURL(res);
+    //   reader.onload = () => {
+    //     this.mealImage = res;
+    //     // this.zone.run(() => {
+    //     //   this.mealImage = res;
+    //     // })
+    //   };
+    // });
   }
 
-  async changeMealImage() {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: true,
-      resultType: CameraResultType.Base64,
-    });
-
-    this.mealImage = 'data:image/jpeg;base64,' + image.base64String;
-    this.newMealImageData = image;
+  toggleMealImage(newImageCroppingStartedEvent: boolean) {
+    this.showMealImage = !newImageCroppingStartedEvent;
   }
 
-  async createMeal() {
+  //i think this goes away
+
+  // async changeMealImage() {
+  //   const image = await Camera.getPhoto({
+  //     quality: 90,
+  //     allowEditing: true,
+  //     resultType: CameraResultType.Base64,
+  //   });
+
+  //   this.mealImage = 'data:image/jpeg;base64,' + image.base64String;
+  //   this.newMealImageData = image;
+  // }
+
+  async updateMeal() {
     const title: string = this.mealForm.get("title").value;
     const accompaniments: string = this.mealForm.get("accompaniments").value;
 
@@ -111,11 +121,11 @@ export class MealEditPage implements OnInit {
       accompaniments: accompaniments
     };
 
-    if (this.newMealImageData) {
+    if (this.newMealImageBase64) {
       const filePath = `${this.mealService.basePath}/${meal.id}`;
       const fileRef = this.fireStorage.ref(filePath);
       const task: AngularFireUploadTask = fileRef.putString(
-        this.newMealImageData.base64String,
+        this.newMealImageBase64.replace("data:image/png;base64,", ""),
         'base64',
         { contentType: 'image/png' }
       )

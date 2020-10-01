@@ -13,6 +13,9 @@ export class ImageCropComponent {
   @Output()
   imageChanged = new EventEmitter();
 
+  @Output()
+  newImageCroppingStarted = new EventEmitter();
+
   constructor() { }
 
   imageChangedEvent: any = '';
@@ -51,6 +54,7 @@ export class ImageCropComponent {
   }
 
   imageLoaded() {
+    this.newImageCroppingStarted.emit(true);
     this.showCropper = true;
   }
 
@@ -140,6 +144,7 @@ export class ImageCropComponent {
     //strip data:image/jpeg;base64,
     // string.replace('data:image/jpeg;base64,', '');
     this.imageChanged.emit(this.croppedImage);
+    this.newImageCroppingStarted.emit(false);
     // this.imageChanged.emit(base64ToFile(this.croppedImage));
     this.imageBase64String = '';
   }

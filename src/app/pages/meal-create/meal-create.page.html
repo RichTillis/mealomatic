@@ -13,17 +13,12 @@
 
   <form [formGroup]="mealForm" (ngSubmit)="createMeal()">
 
-    <ion-img [src]="newMealImageBase64" *ngIf="newMealImageBase64; else dummy" ></ion-img>
+    <ion-img [src]="newMealImageBase64" *ngIf="newMealImageBase64 && showMealImage; else dummy" ></ion-img>
     <ng-template #dummy>
-      <ion-img [src]="dummyMealImage"></ion-img>
+      <ion-img [src]="dummyMealImage" *ngIf="showMealImage"></ion-img>
     </ng-template>
 
-    <app-image-crop (imageChanged)="processNewImage($event)"></app-image-crop>
-
-    <!-- <ion-item button (click)="changeMealImage()" detail="false">
-      <ion-icon name="image-outline" slot="start"></ion-icon>
-      Change Meal Image
-    </ion-item> -->
+    <app-image-crop (imageChanged)="processNewImage($event)" (newImageCroppingStarted)="toggleMealImage($event)"></app-image-crop>
 
     <ion-item>
       <ion-label position="stacked">Meal Title</ion-label>

@@ -11,27 +11,7 @@
 </div>
 
 <ion-card>
-  <ion-toolbar color="primary" *ngIf="imageBase64String">
-    <ion-buttons slot="start">
-      <ion-button (click)="closeModal()">
-        <ion-icon slot="icon-only" name="close"></ion-icon>
-      </ion-button>
-      <ion-button (click)="rotateRight()">
-        <ion-icon slot="icon-only" name="chevron-forward-circle-sharp"></ion-icon>
-      </ion-button>
-      <ion-button (click)="resetImage()">
-        <ion-icon slot="icon-only" name="refresh-circle-sharp"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button (click)="clearImage()">
-        <ion-icon slot="icon-only" name="close-circle-sharp"></ion-icon>
-      </ion-button>
-      <ion-button (click)="confirmImageCrop()">
-        <ion-icon slot="icon-only" name="checkmark-circle"></ion-icon>      
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+  
   <!-- <ion-card-content *ngIf="imageChangedEvent"> -->
   <ion-card-content *ngIf="imageBase64String">
     <image-cropper 
@@ -74,4 +54,25 @@
     </image-cropper> -->
 
   </ion-card-content>
+  <ion-toolbar color="primary" *ngIf="imageBase64String">
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+      <ion-button (click)="rotateRight()">
+        <ion-icon slot="icon-only" name="chevron-forward-circle-sharp"></ion-icon>
+      </ion-button>
+      <ion-button (click)="resetImage()">
+        <ion-icon slot="icon-only" name="refresh-circle-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="clearImage()">
+        <ion-icon slot="icon-only" name="close-circle-sharp"></ion-icon>
+      </ion-button>
+      <ion-button (click)="confirmImageCrop()">
+        <ion-icon slot="icon-only" name="checkmark-circle"></ion-icon>      
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-card>

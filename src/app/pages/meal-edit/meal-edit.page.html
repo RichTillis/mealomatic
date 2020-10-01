@@ -11,17 +11,14 @@
 
 <ion-content class="ion-padding">
 
-  <form [formGroup]="mealForm" (ngSubmit)="createMeal()">
+  <form [formGroup]="mealForm" (ngSubmit)="updateMeal()">
 
-    <ion-img [src]="mealImage" *ngIf="mealImage; else dummy"></ion-img>
+    <ion-img [src]="mealImage" *ngIf="mealImage && showMealImage; else dummy"></ion-img>
     <ng-template #dummy>
-      <ion-img [src]="dummyMealImage"></ion-img>
+      <ion-img [src]="dummyMealImage" *ngIf="showMealImage"></ion-img>
     </ng-template>
 
-    <ion-item button (click)="changeMealImage()" detail="false">
-      <ion-icon name="image-outline" slot="start"></ion-icon>
-      Change Meal Image
-    </ion-item>
+    <app-image-crop (imageChanged)="processNewImage($event)" (newImageCroppingStarted)="toggleMealImage($event)"></app-image-crop>
 
     <ion-item>
       <ion-label position="stacked">Meal Title</ion-label>
@@ -32,8 +29,6 @@
       <ion-label position="stacked">Accompaniments</ion-label>
       <ion-input formControlName="accompaniments" placeholder="What goes with it?" type="text"></ion-input>
     </ion-item>
-
-    <!-- <app-image-crop (imageChanged)="processNewImage($event)"></app-image-crop> -->
 
     <ion-row class="ion-justify-content-center">
       <ion-col size="10">
