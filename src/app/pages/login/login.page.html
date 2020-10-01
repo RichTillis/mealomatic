@@ -28,25 +28,6 @@
           [color]="loginForm.controls.email.value != '' ? 'success':'medium'" [disabled]="!loginForm.valid">
           Log In</ion-button>
       </ion-col>
-
-      <!-- Our custom forward navigation -->
-      <ion-col size="12">
-        <ion-nav-link router-direction="forward" [component]="resetPwPage">
-          <ion-button expand="block" size="small" type="button" fill="clear" color="primary">
-            Forgot your password?</ion-button>
-        </ion-nav-link>
-      </ion-col>
-
-      <ion-col size="10">
-        <ion-button expand="block" type="button" (click)="openGoogleSignup()" color="dark" fill="outline" disabled>
-          <ion-icon name="logo-google" slot="start"></ion-icon>
-          Sign in with Google
-        </ion-button>
-        <ion-button expand="block" type="button" (click)="openAppleSignup()" color="dark" fill="outline" disabled>
-          <ion-icon name="logo-apple" slot="start"></ion-icon>
-          Sign in with Apple
-        </ion-button>
-      </ion-col>
       
     </ion-row>
   </form>

@@ -21,6 +21,7 @@ import { AccountPageModule } from './pages/account/account.module';
 //these need to be lazy loaded somewhere...
 import { MealCreatePageModule } from './pages/meal-create/meal-create.module';
 import { MealEditPageModule } from './pages/meal-edit/meal-edit.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,7 +38,8 @@ import { MealEditPageModule } from './pages/meal-edit/meal-edit.module';
     BrowserAnimationsModule,
     AccountPageModule,
     MealCreatePageModule,
-    MealEditPageModule
+    MealEditPageModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     StatusBar,
